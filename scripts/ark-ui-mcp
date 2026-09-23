@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Small stdio MCP client for Ark UI, since pi does not expose MCP tools natively.
+# Usage: scripts/ark-ui-mcp tools
+#        scripts/ark-ui-mcp <tool_name> '<tool arguments as JSON object>'
+
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+  echo "Usage: $0 tools | <tool_name> ['<JSON arguments>']" >&2
+  exit 2
+fi
+
+command_name=$1
+arguments=${2:-'{}'}
+
+node --input-type=commonjs - "$command_name" "$arguments" <<'NODE'
+const { spawn } = require('node:child_process');
+const readline = require('node:readline');
+
+const commandName = process.argv[2];
+let args;
+try {
+  args = JSON.parse(process.argv[3]);
+  if (!args || Array.isArray(args) || typeof args !== 'object') throw new Error('expected a JSON object');
+} catch (error) {
+  console.error(`Invalid tool arguments: ${error.message}`);
+  process.exit(2);
+}
+
+const server = spawn('npx', ['-y', '@ark-ui/mcp'], { stdio: ['pipe', 'pipe', 'inherit'] });
+const lines = readline.createInterface({ input: server.stdout });
+let nextId = 1;
+const pending = new Map();
+let buffer = '';
+
+lines.on('line', (line) => {
+  let message;
+  try { message = JSON.parse(line); } catch { return; }
+  if (message.id == null || !pending.has(message.id)) return;
+  const { resolve, reject } = pending.get(message.id);
+  pending.delete(message.id);
+  if (message.error) reject(new Error(message.error.message || JSON.stringify(message.error)));
+  else resolve(message.result);
+});
+
+server.on('error', (error) => fail(error));
+server.on('exit', (code) => {
+  if (pending.size) fail(new Error(`Ark UI MCP server exited (${code ?? 'unknown status'})`));
+});
+
+function fail(error) {
+  console.error(`Ark UI MCP error: ${error.message}`);
+  server.kill();
+  process.exit(1);
+}
+function request(method, params = {}) {
+  const id = nextId++;
+  return new Promise((resolve, reject) => {
+    pending.set(id, { resolve, reject });
+    server.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', id, method, params })}\n`);
+  });
+}
+function notify(method, params = {}) {
+  server.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', method, params })}\n`);
+}
+
+(async () => {
+  try {
+    await request('initialize', {
+      protocolVersion: '2024-11-05',
+      capabilities: {},
+      clientInfo: { name: 'ark-ui-shell-client', version: '1.0.0' }
+    });
+    notify('notifications/initialized');
+    const result = commandName === 'tools'
+      ? await request('tools/list')
+      : await request('tools/call', { name: commandName, arguments: args });
+
+    if (commandName === 'tools') {
+      for (const tool of result.tools ?? []) {
+        console.log(`${tool.name}\t${tool.description ?? ''}`);
+        if (tool.inputSchema) console.log(JSON.stringify(tool.inputSchema, null, 2));
+      }
+    } else {
+      for (const item of result.content ?? []) {
+        if (item.text) console.log(item.text);
+        else console.log(JSON.stringify(item));
+      }
+      if (result.isError) process.exitCode = 1;
+    }
+    server.stdin.end();
+    server.kill();
+  } catch (error) {
+    fail(error);
+  }
+})();
+NODE
