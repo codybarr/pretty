@@ -1,78 +1,45 @@
 @import "tailwindcss";
+@import "./themes/slick.css";
 
-@theme {
-  /* Remove Tailwind's built-in color, spacing, and radius tokens. */
-  --color-*: initial;
-  --spacing-*: initial;
-  --radius-*: initial;
+@custom-variant ark-checked (&[data-state="checked"]);
+@custom-variant ark-indeterminate (&[data-state="indeterminate"]);
 
-  /* Compact, named spacing scale */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
-  --spacing-4xl: 6rem;
-  --spacing-picker-area: 8.75rem;
-  --spacing-preview-height: 30rem;
-
-  --breakpoint-phone: 40.625rem;
-  --breakpoint-tablet: 53.125rem;
-  --breakpoint-wide: 90.625rem;
-
-  --container-shell: 100rem;
-  --container-intro: 44rem;
-  --container-copy: 28rem;
-  --container-panel-copy: 14rem;
-  --container-picker: 15rem;
-
-  --text-display: 4rem;
-  --text-mobile-display: 3.25rem;
-  --text-section: 1.375rem;
-  --text-brand: 1.0625rem;
-
-  /* Matching named corner-radius scale */
-  --radius-xs: 0.25rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 0.875rem;
-  --radius-xl: 1.25rem;
-
-  --font-sans: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
-  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-  --font-mono: 'SFMono-Regular', Consolas, monospace;
-
-  /* Calm, elegant blue with cool slate neutrals */
-  --color-background: oklch(0.985 0.008 250);
-  --color-foreground: oklch(0.22 0.035 255);
-  --color-surface: oklch(1 0 0);
-  --color-surface-foreground: oklch(0.22 0.035 255);
-  --color-muted: oklch(0.94 0.018 250);
-  --color-muted-foreground: oklch(0.49 0.035 255);
-  --color-border: oklch(0.87 0.022 250);
-  --color-primary: oklch(0.48 0.13 255);
-  --color-primary-foreground: oklch(0.99 0.005 250);
-  --color-accent: oklch(0.91 0.045 245);
-  --color-accent-foreground: oklch(0.29 0.075 255);
+@layer base {
+	html {
+		background: var(--color-background);
+	}
+	body {
+		margin: 0;
+		background: var(--color-background);
+		font-family: var(--font-sans);
+		color: var(--color-foreground);
+	}
+	button,
+	input,
+	textarea {
+		font: inherit;
+	}
+	::selection {
+		background: var(--color-accent);
+		color: var(--color-foreground);
+	}
 }
 
-/* Only the preview changes theme; Tailwind utilities consume these same tokens. */
+/* Preview-only appearance; the site theme stays Slick. */
 [data-theme="dark"] {
-  --color-background: oklch(0.19 0.015 175);
-  --color-foreground: oklch(0.94 0.012 155);
-  --color-surface: oklch(0.23 0.018 165);
-  --color-surface-foreground: oklch(0.94 0.012 155);
-  --color-muted: oklch(0.27 0.018 165);
-  --color-muted-foreground: oklch(0.72 0.02 165);
-  --color-border: oklch(0.34 0.02 165);
+	--color-background: oklch(0.17 0 0);
+	--color-foreground: oklch(0.96 0 0);
+	--color-surface: oklch(0.21 0 0);
+	--color-surface-foreground: oklch(0.96 0 0);
+	--color-muted: oklch(0.27 0 0);
+	--color-muted-foreground: oklch(0.74 0 0);
+	--color-border: oklch(0.34 0 0);
 }
 
 [data-corners="square"] {
-  --radius-xs: 0px;
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
-  --radius-xl: 0px;
+	--radius-xs: 0px;
+	--radius-sm: 0px;
+	--radius-md: 0px;
+	--radius-lg: 0px;
+	--radius-xl: 0px;
 }

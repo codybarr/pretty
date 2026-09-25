@@ -1,0 +1,73 @@
+/* Slick is the default design system. Future themes can override these tokens. */
+@font-face {
+	font-family: "Wix Madefor Text";
+	src: url("/fonts/wix-madefor-text-latin.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 400 800;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Roboto Mono";
+	src: url("/fonts/roboto-mono-latin.woff2") format("woff2");
+	font-style: normal;
+	font-weight: 100 700;
+	font-display: swap;
+}
+
+@theme {
+	--color-*: initial;
+	--spacing-*: initial;
+	--radius-*: initial;
+
+	--spacing-xs: 0.25rem;
+	--spacing-sm: 0.5rem;
+	--spacing-md: 1rem;
+	--spacing-lg: 1.5rem;
+	--spacing-xl: 2rem;
+	--spacing-2xl: 3rem;
+	--spacing-3xl: 4rem;
+	--spacing-4xl: 6rem;
+	--spacing-picker-area: 8.75rem;
+	--spacing-preview-height: 30rem;
+
+	--breakpoint-phone: 40.625rem;
+	--breakpoint-tablet: 53.125rem;
+	--breakpoint-wide: 90.625rem;
+
+	--container-shell: 100rem;
+	--container-intro: 44rem;
+	--container-copy: 28rem;
+	--container-panel-copy: 14rem;
+	--container-picker: 15rem;
+
+	--text-display: 3.5rem;
+	--text-mobile-display: 2.5rem;
+	--text-section: 1.375rem;
+	--text-brand: 1.0625rem;
+
+	--radius-xs: 0.25rem;
+	--radius-sm: 0.375rem;
+	--radius-md: 0.5rem;
+	--radius-lg: 0.5rem;
+	--radius-xl: 0.5rem;
+
+	--font-sans: "Wix Madefor Text", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "Roboto Mono", ui-monospace, monospace;
+
+	--color-background: oklch(0.985 0 0);
+	--color-foreground: oklch(0.19 0 0);
+	--color-surface: oklch(1 0 0);
+	--color-surface-foreground: oklch(0.19 0 0);
+	--color-muted: oklch(0.96 0 0);
+	--color-muted-foreground: oklch(0.46 0 0);
+	--color-border: oklch(0.89 0 0);
+	--color-primary: oklch(0.63887 0.18038 32.24);
+	--color-primary-foreground: oklch(1 0 0);
+	--color-accent: oklch(0.96 0.015 30);
+	--color-accent-foreground: oklch(0.38 0.13 30);
+	--color-code: oklch(0.27806 0.01169 248.25);
+	--color-code-header: oklch(0.24063 0.01211 248.33);
+	--color-code-border: oklch(0.37493 0.01387 243.98);
+	--color-code-foreground: oklch(0.91772 0.00632 255.48);
+}
