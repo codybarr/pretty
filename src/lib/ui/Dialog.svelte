@@ -1,5 +1,6 @@
 <script lang="ts">
 import { Dialog as ArkDialog } from "@ark-ui/svelte/dialog";
+import { IconX } from "@tabler/icons-svelte";
 import { button, dialogContent, focus, panel } from "./variants";
 import type { Snippet } from "svelte";
 
@@ -28,10 +29,12 @@ let {
   <ArkDialog.Backdrop class="fixed inset-0 z-40 bg-foreground/40" />
   <ArkDialog.Positioner class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-md">
     <ArkDialog.Content class={`${panel()} ${dialogContent({ size })} ${className}`} >
-      <ArkDialog.Title class="pr-lg text-section font-semibold text-foreground">{title}</ArkDialog.Title>
+      <ArkDialog.Title class="pr-2xl text-section font-semibold text-foreground">{title}</ArkDialog.Title>
       {#if description}<ArkDialog.Description class="mt-xs text-sm text-muted-foreground">{description}</ArkDialog.Description>{/if}
       <div class="mt-md text-sm text-foreground">{@render children()}</div>
-      <ArkDialog.CloseTrigger class={`absolute right-sm top-sm grid size-lg cursor-pointer place-items-center rounded-xs text-muted-foreground hover:bg-muted ${focus()}`}  aria-label="Close dialog">×</ArkDialog.CloseTrigger>
+      <ArkDialog.CloseTrigger class={`group absolute right-xs top-xs grid size-2xl cursor-pointer place-items-center rounded-xs text-muted-foreground ${focus()}`} aria-label="Close dialog">
+        <IconX size={24} aria-hidden="true" class="transition-transform duration-150 group-hover:rotate-12 motion-reduce:transform-none motion-reduce:transition-none" />
+      </ArkDialog.CloseTrigger>
     </ArkDialog.Content>
   </ArkDialog.Positioner>
 </ArkDialog.Root>
