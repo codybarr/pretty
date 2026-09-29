@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # Small stdio MCP client for Ark UI, since pi does not expose MCP tools natively.
-# Usage: scripts/ark-ui-mcp tools
-#        scripts/ark-ui-mcp <tool_name> '<tool arguments as JSON object>'
+# Usage: ark-ui-mcp tools
+#        ark-ui-mcp <tool_name> '<tool arguments as JSON object>'
 
 if [[ $# -lt 1 || $# -gt 2 ]]; then
   echo "Usage: $0 tools | <tool_name> ['<JSON arguments>']" >&2

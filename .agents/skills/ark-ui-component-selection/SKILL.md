@@ -14,7 +14,7 @@ Use this skill for every UI task: pages, forms, dashboards, navigation, overlays
    - whether choices are known, searchable, hierarchical, or editable
    - whether the interaction is inline, contextual, modal, or persistent
    - keyboard, focus, validation, loading, and error requirements
-2. Before writing interactive UI code, consult Ark UI's MCP tools. If the current client exposes them, call them directly. Otherwise, use the `ark-ui-mcp-shell` companion skill and the project helper `scripts/ark-ui-mcp` to make the same tool calls from the shell. Use `list_components` to choose candidates, `list_examples` and `get_example` for framework-specific usage, and `styling_guide` before styling components. Use props/docs tools as needed. Do not launch `npx -y @ark-ui/mcp` by itself: it only starts the stdio server. If direct tools and the shell helper are both unavailable, fall back to official Ark UI docs and be transparent; never claim MCP was consulted unless results were actually retrieved.
+2. Before writing interactive UI code, consult Ark UI's MCP tools. If the current client exposes them, call them directly. Otherwise, use the helper bundled with this skill as described in **Calling MCP tools from the shell** below. Use `list_components` to choose candidates, `list_examples` and `get_example` for framework-specific usage, and `styling_guide` before styling components. Use props/docs tools as needed. If direct tools and the shell helper are both unavailable, fall back to official Ark UI docs and be transparent; never claim MCP was consulted unless results were actually retrieved.
 3. Briefly state the selected component(s) and why they match the interaction. Then implement using the retrieved example as the behavioral baseline.
 4. Do not replace an available Ark UI primitive with hand-rolled ARIA, focus management, popover positioning, or keyboard interaction. Build custom visual wrappers only around the documented primitive.
 
@@ -35,6 +35,25 @@ Use this skill for every UI task: pages, forms, dashboards, navigation, overlays
 - **Collections**: consult the collection tools/examples for async data, list selection, and tree state rather than creating ad hoc selection state.
 
 When the request does not cleanly fit a primitive, use `list_components` and examples to evaluate the closest candidates rather than guessing.
+
+## Calling MCP tools from the shell
+
+The executable `ark-ui-mcp` next to this SKILL.md starts `@ark-ui/mcp`, performs the MCP handshake, calls a tool, and prints its result. Resolve its path relative to this skill directory, not the project working directory. Do not launch `npx -y @ark-ui/mcp` by itself: it only starts a server and waits for protocol input.
+
+Set `ARK_UI_MCP` to the absolute path of `ark-ui-mcp` alongside this SKILL.md (even when working in another project). Then:
+
+```bash
+"$ARK_UI_MCP" tools
+"$ARK_UI_MCP" list_components '{"framework":"svelte"}'
+"$ARK_UI_MCP" list_examples '{"framework":"svelte","component":"select"}'
+"$ARK_UI_MCP" get_example '{"framework":"svelte","component":"select","exampleId":"<id-from-list_examples>"}'
+"$ARK_UI_MCP" styling_guide '{"component":"select"}'
+"$ARK_UI_MCP" get_component_props '{"framework":"svelte","component":"select"}'
+"$ARK_UI_MCP" search_docs '{"query":"select keyboard interaction"}'
+"$ARK_UI_MCP" get_docs '{"slug":"<slug-from-search_docs>"}'
+```
+
+Pass each tool's arguments as a JSON object in the second argument. Discover current tool names and input schemas with `"$ARK_UI_MCP" tools`; do not assume the server's tool set is fixed. For examples, call `list_examples` first and pass an ID from its output to `get_example`. For docs, use `search_docs` before `get_docs` when the slug is unknown. If the helper fails, report the failure honestly and fall back to official docs; do not claim MCP results that were not retrieved.
 
 ## MCP setup
 
