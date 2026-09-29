@@ -46,8 +46,8 @@ export const examples: Record<string, { summary: string; code: string }> = {
 	},
 	switch: {
 		summary:
-			"Use a switch for an immediately applied setting, rather than a submitted form choice.",
-		code: `<script lang="ts">\n  import { Switch } from '$lib/ui';\n  let enabled = $state(true);\n</script>\n\n<Switch label="Email notifications" bind:checked={enabled} />`,
+			"Use a switch for an immediately applied setting, rather than a submitted form choice. Set size to sm (small, 2 × 1rem), md (medium, 3 × 1.5rem), or lg (large, 4 × 2rem). Dimensions are track width × height; md is the default.",
+		code: `<script lang="ts">\n  import { Switch } from '$lib/ui';\n  let small = $state(true);\n  let medium = $state(true);\n  let large = $state(true);\n</script>\n\n<Switch label="Small" size="sm" bind:checked={small} />\n<Switch label="Medium (default)" size="md" bind:checked={medium} />\n<Switch label="Large" size="lg" bind:checked={large} />`,
 	},
 	select: {
 		summary:

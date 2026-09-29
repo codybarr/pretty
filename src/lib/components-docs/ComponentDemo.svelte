@@ -3,7 +3,9 @@ import { Checkbox, Dialog, Select, Switch, Tabs } from "$lib/ui";
 
 let { slug }: { slug: string } = $props();
 let accepted = $state(false);
-let enabled = $state(true);
+let small = $state(true);
+let medium = $state(true);
+let large = $state(true);
 let team = $state<string[]>([]);
 let tab = $state("overview");
 const options = [
@@ -20,7 +22,11 @@ const options = [
 {#if slug === 'checkbox'}
   <div class="grid gap-md"><Checkbox label="Send me product updates" name="updates" bind:checked={accepted} /><p class="font-mono text-xs text-muted-foreground">Checked: {accepted ? 'true' : 'false'}</p></div>
 {:else if slug === 'switch'}
-  <div class="grid gap-md"><Switch label="Email notifications" bind:checked={enabled} /><p class="font-mono text-xs text-muted-foreground">Enabled: {enabled ? 'true' : 'false'}</p></div>
+  <div class="grid gap-md">
+    <Switch label="Small (sm)" size="sm" bind:checked={small} />
+    <Switch label="Medium (md, default)" size="md" bind:checked={medium} />
+    <Switch label="Large (lg)" size="lg" bind:checked={large} />
+  </div>
 {:else if slug === 'select'}
   <div class="grid max-w-picker gap-md"><Select label="Team" {options} bind:value={team} name="team" /><p class="font-mono text-xs text-muted-foreground">Selected: {team[0] ?? 'none'}</p></div>
 {:else if slug === 'tabs'}

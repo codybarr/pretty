@@ -34,9 +34,11 @@ export const checkboxControl = cva(
 	},
 );
 export const switchControl = cva(
-	"flex shrink-0 items-center rounded-full bg-muted-foreground p-xs transition-colors ark-checked:bg-primary",
+	"flex shrink-0 items-center rounded-xs bg-muted-foreground p-xs inset-shadow-sm transition-colors ark-checked:bg-primary motion-reduce:transition-none",
 	{
-		variants: { size: { sm: "h-md w-xl", md: "h-lg w-2xl" } },
+		variants: {
+			size: { sm: "h-md w-xl", md: "h-lg w-2xl", lg: "h-xl w-3xl" },
+		},
 		defaultVariants: { size: "md" },
 	},
 );
