@@ -3,6 +3,7 @@ import {
 	Select as ArkSelect,
 	createListCollection,
 } from "@ark-ui/svelte/select";
+import { IconChevronDown } from "@tabler/icons-svelte";
 import { control, field, label as labelStyle, option, panel } from "./variants";
 
 type Option = { label: string; value: string; disabled?: boolean };
@@ -31,7 +32,10 @@ let collection = $derived(createListCollection({ items: options }));
 <ArkSelect.Root class={`${field()} ${className}`}  {collection} bind:value {name} {disabled}>
   <ArkSelect.Label class={labelStyle()}>{label}</ArkSelect.Label>
   <ArkSelect.Control>
-    <ArkSelect.Trigger class={`${control({ size })} flex w-full cursor-pointer items-center justify-between gap-sm rounded-xs px-sm text-left`} ><ArkSelect.ValueText {placeholder} /><ArkSelect.Indicator aria-hidden="true">⌄</ArkSelect.Indicator></ArkSelect.Trigger>
+    <ArkSelect.Trigger class={`${control({ size })} flex w-full cursor-pointer items-center justify-between gap-sm rounded-xs px-md py-sm text-left`} >
+      <ArkSelect.ValueText {placeholder} />
+      <ArkSelect.Indicator class="inline-flex shrink-0" aria-hidden="true"><IconChevronDown size={16} /></ArkSelect.Indicator>
+    </ArkSelect.Trigger>
   </ArkSelect.Control>
   <!-- Keep the positioner inside the theme scope rather than portaling to body. -->
   <ArkSelect.Positioner>
