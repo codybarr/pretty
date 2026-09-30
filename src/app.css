@@ -44,6 +44,7 @@
 	--radius-xl: 0.5rem;
 }
 
+/* biome-ignore lint/correctness/noInvalidPositionAtImportRule: Tailwind inlines this import at build time after the defaults so theme overrides win. */
 @import "./themes/slick.css";
 
 @custom-variant ark-checked (&[data-state="checked"]);

@@ -32,8 +32,8 @@ let {
       <ArkDialog.Title class="pr-2xl text-section font-semibold text-foreground">{title}</ArkDialog.Title>
       {#if description}<ArkDialog.Description class="mt-xs text-sm text-muted-foreground">{description}</ArkDialog.Description>{/if}
       <div class="mt-md text-sm text-foreground">{@render children()}</div>
-      <ArkDialog.CloseTrigger class={`group absolute right-xs top-xs grid size-2xl cursor-pointer place-items-center rounded-xs text-muted-foreground ${focus()}`} aria-label="Close dialog">
-        <IconX size={24} aria-hidden="true" class="transition-transform duration-150 group-hover:rotate-12 motion-reduce:transform-none motion-reduce:transition-none" />
+      <ArkDialog.CloseTrigger class={`absolute right-xs top-xs grid size-2xl cursor-pointer place-items-center rounded-xs text-muted-foreground ${focus()}`} aria-label="Close dialog">
+        <IconX size={24} aria-hidden="true" />
       </ArkDialog.CloseTrigger>
     </ArkDialog.Content>
   </ArkDialog.Positioner>
