@@ -1,18 +1,26 @@
 import { cva } from "class-variance-authority";
 
 export const button = cva(
-	"inline-flex min-h-2xl items-center justify-center gap-sm rounded-xs border px-md text-sm font-semibold transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 data-disabled:opacity-50",
+	"inline-flex shrink-0 items-center justify-center gap-sm rounded-xs border font-semibold leading-tight whitespace-nowrap transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50 data-disabled:cursor-not-allowed data-disabled:opacity-50 motion-reduce:transition-none",
 	{
 		variants: {
 			variant: {
 				primary:
-					"border-primary bg-primary text-primary-foreground hover:brightness-95",
+					"border-primary-action bg-primary-action text-primary-foreground enabled:hover:brightness-95 enabled:active:brightness-90",
+				secondary:
+					"border-transparent bg-muted text-foreground enabled:hover:bg-border enabled:active:bg-muted",
 				outline:
-					"border-border bg-surface text-foreground hover:border-primary hover:bg-accent",
+					"border-border bg-surface text-foreground enabled:hover:border-primary enabled:hover:bg-accent enabled:active:bg-muted",
 				ghost:
-					"border-transparent bg-transparent text-foreground hover:bg-muted",
+					"border-transparent bg-transparent text-foreground enabled:hover:bg-muted enabled:active:bg-border",
+				danger:
+					"border-danger bg-danger text-danger-foreground enabled:hover:brightness-95 enabled:active:brightness-90",
 			},
-			size: { sm: "min-h-lg px-sm text-xs", md: "min-h-2xl px-md text-sm" },
+			size: {
+				sm: "min-h-button-sm px-sm py-xs text-xs",
+				md: "min-h-button-md px-md py-sm text-sm",
+				lg: "min-h-button-lg px-lg py-sm text-base",
+			},
 		},
 		defaultVariants: { variant: "outline", size: "md" },
 	},

@@ -20,7 +20,7 @@ async function copyCode() {
 }
 </script>
 
-<svelte:head><title>{titleFor(data.slug)} — Hue Studio Components</title></svelte:head>
+<svelte:head><title>{titleFor(data.slug)} — Pretty - Slick</title></svelte:head>
 
 <div class="max-w-intro">
   <div class="flex items-center gap-sm font-mono text-xs text-muted-foreground"><a href={resolve('/components')} class="text-primary hover:underline">COMPONENTS</a><span>/</span><span>{titleFor(data.slug).toUpperCase()}</span></div>

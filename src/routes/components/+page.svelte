@@ -3,7 +3,7 @@ import { resolve } from "$app/paths";
 import { examples, titleFor } from "$lib/components-docs/catalog";
 </script>
 
-<svelte:head><title>Components — Hue Studio</title></svelte:head>
+<svelte:head><title>Components — Pretty - Slick</title></svelte:head>
 <div class="max-w-intro">
   <p class="font-mono text-xs text-primary">SLICK / COMPONENTS</p>
   <h1 class="mt-md text-display font-bold leading-tight max-phone:text-mobile-display">The component library.</h1>

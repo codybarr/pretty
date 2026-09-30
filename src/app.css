@@ -18,6 +18,9 @@
 	--spacing-4xl: 6rem;
 	--spacing-picker-area: 8.75rem;
 	--spacing-preview-height: 30rem;
+	--spacing-button-sm: 2rem;
+	--spacing-button-md: 2.5rem;
+	--spacing-button-lg: 3rem;
 
 	--breakpoint-phone: 40.625rem;
 	--breakpoint-tablet: 53.125rem;

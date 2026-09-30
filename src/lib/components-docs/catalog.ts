@@ -9,7 +9,7 @@ export const groups = [
 	{
 		title: "Overlays & actions",
 		slugs:
-			"dialog drawer popover tooltip hover-card menu toast listbox navigation-menu floating-panel tour".split(
+			"button dialog drawer popover tooltip hover-card menu toast listbox navigation-menu floating-panel tour".split(
 				" ",
 			),
 	},
@@ -39,6 +39,11 @@ export const titleFor = (slug: string) =>
 export const allSlugs = groups.flatMap((group) => group.slugs);
 
 export const examples: Record<string, { summary: string; code: string }> = {
+	button: {
+		summary:
+			"A native action button with primary (default), secondary, outline, ghost, and danger variants. Sizes sm, md (default), and lg have minimum heights of 32, 40, and 48px. Standard button attributes and events are forwarded; type defaults to button, so form submission is opt-in.",
+		code: `<script lang="ts">\n  import { Button } from '$lib/ui';\n  let count = $state(0);\n</script>\n\n<Button onclick={() => count += 1}>Clicked {count} times</Button>\n<Button variant="secondary">Secondary</Button>\n<Button variant="outline">Outline</Button>\n<Button variant="ghost">Ghost</Button>\n<Button variant="danger">Delete</Button>\n\n<Button size="sm">Small</Button>\n<Button size="md">Medium</Button>\n<Button size="lg">Large</Button>\n<Button disabled>Unavailable</Button>\n<Button type="submit" form="settings">Save settings</Button>`,
+	},
 	checkbox: {
 		summary:
 			"A form-ready boolean choice with a visible label, keyboard focus, and an Ark hidden input.",
@@ -53,6 +58,11 @@ export const examples: Record<string, { summary: string; code: string }> = {
 		summary:
 			"Choose one option from a fixed list. The bindable value follows Ark’s string-array convention.",
 		code: `<script lang="ts">\n  import { Select } from '$lib/ui';\n  let value = $state<string[]>([]);\n  const options = [\n    { label: 'Design', value: 'design' },\n    { label: 'Engineering', value: 'engineering' },\n    { label: 'Product', value: 'product' },\n  ];\n</script>\n\n<Select label="Team" {options} bind:value name="team" />`,
+	},
+	combobox: {
+		summary:
+			"Search and select from a list with Arrow keys and Enter. Supports bindable value, disabled options, and an inline layout for command search overlays.",
+		code: `<script lang="ts">\n  import { Combobox } from '$lib/ui';\n  let value = $state<string[]>([]);\n  const options = [\n    { label: 'Design', value: 'design' },\n    { label: 'Engineering', value: 'engineering' },\n    { label: 'Product', value: 'product' },\n  ];\n</script>\n\n<Combobox label="Team" {options} bind:value name="team" />`,
 	},
 	tabs: {
 		summary:

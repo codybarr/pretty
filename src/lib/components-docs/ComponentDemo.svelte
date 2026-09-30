@@ -1,8 +1,25 @@
 <script lang="ts">
-import { Checkbox, Dialog, Select, Switch, Tabs } from "$lib/ui";
+import {
+	Button,
+	Checkbox,
+	Combobox,
+	Dialog,
+	Select,
+	Switch,
+	Tabs,
+} from "$lib/ui";
 
 let { slug }: { slug: string } = $props();
 let accepted = $state(false);
+let clicks = $state(0);
+const buttonVariants = [
+	"primary",
+	"secondary",
+	"outline",
+	"ghost",
+	"danger",
+] as const;
+const buttonSizes = ["sm", "md", "lg"] as const;
 let small = $state(true);
 let medium = $state(true);
 let large = $state(true);
@@ -19,7 +36,25 @@ const options = [
 {#snippet activity()}<p class="text-sm text-muted-foreground">No recent activity to show.</p>{/snippet}
 {#snippet openDetails()}Open details{/snippet}
 
-{#if slug === 'checkbox'}
+{#if slug === 'button'}
+  <div class="grid gap-lg">
+    {#each buttonSizes as size (size)}
+      <div class="flex flex-wrap items-center gap-sm">
+        <span class="w-xl font-mono text-xs text-muted-foreground">{size}</span>
+        {#each buttonVariants as variant (variant)}
+          <Button {variant} {size} onclick={() => clicks += 1}>{variant[0].toUpperCase() + variant.slice(1)}</Button>
+        {/each}
+      </div>
+    {/each}
+    <div class="flex flex-wrap items-center gap-sm">
+      <span class="w-xl font-mono text-xs text-muted-foreground">Off</span>
+      {#each buttonVariants as variant (variant)}
+        <Button {variant} disabled>{variant[0].toUpperCase() + variant.slice(1)}</Button>
+      {/each}
+    </div>
+    <p class="font-mono text-xs text-muted-foreground" aria-live="polite">Clicks: {clicks}</p>
+  </div>
+{:else if slug === 'checkbox'}
   <div class="grid gap-md"><Checkbox label="Send me product updates" name="updates" bind:checked={accepted} /><p class="font-mono text-xs text-muted-foreground">Checked: {accepted ? 'true' : 'false'}</p></div>
 {:else if slug === 'switch'}
   <div class="grid gap-md">
@@ -29,6 +64,8 @@ const options = [
   </div>
 {:else if slug === 'select'}
   <div class="grid max-w-picker gap-md"><Select label="Team" {options} bind:value={team} name="team" /><p class="font-mono text-xs text-muted-foreground">Selected: {team[0] ?? 'none'}</p></div>
+{:else if slug === 'combobox'}
+  <div class="grid max-w-picker gap-md"><Combobox label="Team" {options} bind:value={team} name="team" /><p class="font-mono text-xs text-muted-foreground">Selected: {team[0] ?? 'none'}</p></div>
 {:else if slug === 'tabs'}
   <div class="w-full max-w-copy"><Tabs bind:value={tab} tabs={[{ label: 'Overview', value: 'overview', content: overview }, { label: 'Activity', value: 'activity', content: activity }]} /></div>
 {:else if slug === 'dialog'}

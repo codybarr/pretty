@@ -2,6 +2,7 @@
 import { page } from "$app/state";
 import { resolve } from "$app/paths";
 import ThemeSwitcher from "$lib/ThemeSwitcher.svelte";
+import ComponentSearch from "$lib/ComponentSearch.svelte";
 import {
 	allSlugs,
 	examples,
@@ -17,9 +18,10 @@ let { children } = $props();
 
 <div class="mx-auto max-w-shell px-xl text-foreground max-tablet:px-lg" data-design="slick">
   <header class="flex min-h-3xl flex-wrap items-center justify-between gap-sm border-b border-border py-sm max-phone:min-h-2xl">
-    <a href={resolve('/')} class="text-brand font-bold text-foreground no-underline">hue<span class="text-primary">studio</span></a>
+    <a href={resolve('/')} class="text-brand font-bold text-foreground no-underline">pretty</a>
     <div class="flex items-center gap-md max-phone:w-full max-phone:justify-between">
       <ThemeSwitcher />
+      <ComponentSearch />
       <nav aria-label="Main navigation" class="flex items-center gap-lg text-sm max-phone:gap-sm">
         <a href={resolve('/')} class="text-muted-foreground hover:text-primary">Workshop</a>
         <a href={resolve('/components')} aria-current="page" class="font-semibold text-primary">Components</a>

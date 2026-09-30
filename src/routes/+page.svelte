@@ -4,6 +4,7 @@ import { ColorPicker, parseColor } from "@ark-ui/svelte/color-picker";
 import { SegmentGroup } from "@ark-ui/svelte/segment-group";
 import { Tabs } from "@ark-ui/svelte/tabs";
 import ThemeSwitcher from "$lib/ThemeSwitcher.svelte";
+import ComponentSearch from "$lib/ComponentSearch.svelte";
 
 let primary = $state(parseColor("#e4573e"));
 let mode = $state<"light" | "dark">("light");
@@ -44,19 +45,20 @@ const input =
 </script>
 
 <svelte:head>
-	<title>Slick — Hue Studio theme builder</title>
+	<title>Pretty - Slick</title>
 	<meta name="description" content="Shape a color system and see it come to life in a realistic interface." />
 </svelte:head>
 
 <div class="mx-auto max-w-shell px-xl text-foreground max-tablet:px-lg" data-design="slick">
 	<header class="flex min-h-3xl flex-wrap items-center justify-between gap-sm border-b border-border py-sm max-phone:min-h-2xl">
-		<a class="flex items-center gap-sm text-brand font-bold text-foreground no-underline" href={resolve('/')} aria-label="Hue Studio home">
+		<a class="flex items-center gap-sm text-brand font-bold text-foreground no-underline" href={resolve('/')} aria-label="Pretty home">
 			<span class="flex h-md items-end gap-xs" aria-hidden="true"><span class="h-sm w-xs rotate-12 rounded-full bg-primary"></span><span class="h-md w-xs rotate-12 rounded-full bg-primary"></span><span class="h-md w-xs rotate-12 rounded-full bg-primary"></span></span>
-			<span>hue<span class="font-medium text-muted-foreground">studio</span></span>
+			<span>pretty</span>
 		</a>
 		<div class="flex items-center gap-sm font-mono text-xs text-muted-foreground max-tablet:hidden"><span class="inline-block size-xs rounded-full bg-primary"></span> SLICK / THEME WORKSHOP <span class="mx-xs h-md border-l border-border"></span> LIVE SESSION</div>
 		<div class="flex items-center gap-md max-phone:w-full max-phone:justify-between">
 			<ThemeSwitcher />
+			<ComponentSearch />
 			<nav aria-label="Main navigation" class="flex items-center gap-lg text-sm max-phone:gap-sm"><a class="text-muted-foreground no-underline hover:text-primary" href={resolve('/#preview')}>Explore preview <span aria-hidden="true">↗</span></a><a class="font-semibold text-primary no-underline hover:underline" href={resolve('/components')}>Components</a></nav>
 		</div>
 	</header>
@@ -132,7 +134,7 @@ const input =
 			</section>
 		</div>
 	</main>
-	<footer class="flex min-h-3xl items-center justify-between border-t border-border font-mono text-xs text-muted-foreground"><span>HUE STUDIO / SLICK</span><span>MADE FOR THE DETAILS <span class="text-primary">✳</span></span></footer>
+	<footer class="flex min-h-3xl items-center justify-between border-t border-border font-mono text-xs text-muted-foreground"><span>PRETTY / SLICK</span><span>MADE FOR THE DETAILS <span class="text-primary">✳</span></span></footer>
 </div>
 
 <style>
