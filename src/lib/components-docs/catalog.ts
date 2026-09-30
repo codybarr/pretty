@@ -39,6 +39,31 @@ export const titleFor = (slug: string) =>
 export const allSlugs = groups.flatMap((group) => group.slugs);
 
 export const examples: Record<string, { summary: string; code: string }> = {
+	field: {
+		summary:
+			"A labeled text input or textarea with Ark-managed helper/error associations and required indicators. Supports native input attributes, bindable string values, sm/md/lg sizes, invalid, disabled, and read-only states. Set multiline for a textarea; validation is supplied by the caller.",
+		code: `<script lang="ts">\n  import { Field } from '$lib/ui';\n  let name = $state('');\n  let notes = $state('');\n</script>\n\n<Field label="Full name" name="name" autocomplete="name" required bind:value={name} helper="Your public display name." />\n<Field label="Notes" name="notes" multiline bind:value={notes} />\n<Field label="Email" type="email" invalid error="Enter a valid email address." />`,
+	},
+	fieldset: {
+		summary:
+			"Groups related fields under a semantic legend. Helper and error text are associated by Ark; disabled propagates to descendant fields. Accepts Ark Fieldset root props and a children snippet.",
+		code: `<script lang="ts">\n  import { Field, Fieldset } from '$lib/ui';\n</script>\n\n<Fieldset legend="Contact details" helper="Where we can reach you.">\n  <Field label="Full name" name="name" autocomplete="name" required />\n  <Field label="Email" name="email" type="email" autocomplete="email" />\n</Fieldset>`,
+	},
+	"radio-group": {
+		summary:
+			"One choice from a visible set, with arrow-key navigation and native form inputs. Bind value as string or null. Supports disabled options, horizontal/vertical orientation, sm/md/lg sizes, required and invalid states, and Ark Radio Group root props.",
+		code: `<script lang="ts">\n  import { RadioGroup } from '$lib/ui';\n  let team = $state<string | null>(null);\n</script>\n\n<RadioGroup label="Team" name="team" required bind:value={team} options={[\n  { label: 'Design', value: 'design' },\n  { label: 'Engineering', value: 'engineering' },\n  { label: 'Product', value: 'product', disabled: true },\n]} />`,
+	},
+	"number-input": {
+		summary:
+			"Precise numeric entry with keyboard and stepper controls. The bindable value is a string so empty and intermediate input remain representable. Supports Ark root props including min/max, step, formatting, name, required, disabled and read-only, plus helper/error text and sm/md/lg sizes.",
+		code: `<script lang="ts">\n  import { NumberInput } from '$lib/ui';\n  let seats = $state('3');\n</script>\n\n<NumberInput label="Seats" name="seats" min={1} max={10} step={1} required bind:value={seats} helper="Between 1 and 10 seats." />`,
+	},
+	"password-input": {
+		summary:
+			"A labeled password field with Ark-managed visibility toggling. Bind value and optionally visible. Supports name, autocomplete (current-password by default), required, disabled, read-only, invalid, helper/error text and sm/md/lg sizes. Validation is supplied by the caller.",
+		code: `<script lang="ts">\n  import { PasswordInput } from '$lib/ui';\n  let password = $state('');\n  let visible = $state(false);\n</script>\n\n<PasswordInput label="Password" name="password" autocomplete="new-password" required bind:value={password} bind:visible helper="Use at least 12 characters." />`,
+	},
 	button: {
 		summary:
 			"A native action button with primary (default), secondary, outline, ghost, and danger variants. Sizes sm, md (default), and lg have minimum heights of 32, 40, and 48px. Standard button attributes and events are forwarded; type defaults to button, so form submission is opt-in.",

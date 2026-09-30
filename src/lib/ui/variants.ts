@@ -34,6 +34,31 @@ export const control = cva(
 	},
 );
 
+export const input = cva(
+	"w-full min-w-0 rounded-xs border border-border bg-surface py-xs text-foreground placeholder:text-muted-foreground transition-colors enabled:hover:border-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary data-invalid:border-danger aria-invalid:border-danger data-invalid:hover:border-danger aria-invalid:hover:border-danger disabled:cursor-not-allowed read-only:bg-muted motion-reduce:transition-none",
+	{
+		variants: {
+			size: {
+				sm: "min-h-button-sm text-xs",
+				md: "min-h-button-md text-sm",
+				lg: "min-h-button-lg text-base",
+			},
+			adornment: { none: "px-sm", both: "px-2xl", end: "pl-sm pr-2xl" },
+		},
+		defaultVariants: { size: "md", adornment: "none" },
+	},
+);
+export const inputAction = cva(
+	"absolute inline-flex size-xl items-center justify-center rounded-xs text-muted-foreground cursor-pointer enabled:hover:bg-muted enabled:hover:text-foreground focus-visible:outline-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50 data-disabled:cursor-not-allowed data-disabled:opacity-50",
+);
+export const radioControl = cva(
+	"grid shrink-0 place-items-center rounded-full border border-border bg-surface ark-checked:border-primary-action data-invalid:border-danger after:size-sm after:rounded-full after:bg-primary-action after:opacity-0 ark-checked:after:opacity-100",
+	{
+		variants: { size: { sm: "size-md", md: "size-lg", lg: "size-xl" } },
+		defaultVariants: { size: "md" },
+	},
+);
+
 export const checkboxControl = cva(
 	"grid shrink-0 place-items-center rounded-xs border border-border bg-surface text-primary-foreground ark-checked:border-primary ark-checked:bg-primary ark-indeterminate:border-primary ark-indeterminate:bg-primary",
 	{

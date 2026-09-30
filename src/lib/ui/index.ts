@@ -1,3 +1,8 @@
+export { default as Field } from "./Field.svelte";
+export { default as Fieldset } from "./Fieldset.svelte";
+export { default as RadioGroup } from "./RadioGroup.svelte";
+export { default as NumberInput } from "./NumberInput.svelte";
+export { default as PasswordInput } from "./PasswordInput.svelte";
 export { default as Button } from "./Button.svelte";
 export { default as Checkbox } from "./Checkbox.svelte";
 export { default as Switch } from "./Switch.svelte";
@@ -9,6 +14,7 @@ export {
 	button,
 	control,
 	field,
+	input,
 	focus,
 	label,
 	option,
