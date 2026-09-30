@@ -1,6 +1,7 @@
 <script lang="ts">
 import { resolve } from "$app/paths";
-import { ColorPicker, parseColor } from "@ark-ui/svelte/color-picker";
+import { parseColor } from "@ark-ui/svelte/color-picker";
+import { ColorPicker } from "$lib/ui";
 import { SegmentGroup } from "@ark-ui/svelte/segment-group";
 import { Tabs } from "@ark-ui/svelte/tabs";
 import ThemeSwitcher from "$lib/ThemeSwitcher.svelte";
@@ -75,22 +76,8 @@ const input =
 				<div class="flex items-start justify-between"><div><div class={kicker}>YOUR FOUNDATION</div><h2 class="mt-sm text-2xl font-semibold">Set the tone</h2></div><span class="grid size-lg place-items-center rounded-xs border border-border font-mono text-xs text-muted-foreground">01</span></div>
 				<p class="mt-sm mb-lg max-w-panel-copy text-sm leading-relaxed text-muted-foreground max-phone:max-w-copy">Choose a primary color. We’ll build a balanced accent around it.</p>
 				<div class="mb-md">
-					<div class="mb-sm flex items-center justify-between"><label class={label} for="primary-color-label">Primary color</label><span class={kicker}>FOUNDATION</span></div>
-					<ColorPicker.Root class="relative block" bind:value={primary}>
-						<ColorPicker.Label class="sr-only" id="primary-color-label">Primary color</ColorPicker.Label>
-						<ColorPicker.Control class="flex h-2xl items-center rounded-xs border border-border bg-surface">
-							<ColorPicker.ChannelInput class="min-w-0 flex-1 bg-transparent px-sm font-mono text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-primary" channel="hex" aria-label="Primary color hex value" />
-							<ColorPicker.Trigger class="mr-sm flex h-lg w-2xl cursor-pointer items-center gap-xs rounded-xs border border-border bg-surface p-0 focus-visible:outline-2 focus-visible:outline-primary" aria-label="Open color picker"><ColorPicker.ValueSwatch class="h-full w-lg" /><span class="text-sm text-muted-foreground" aria-hidden="true">⌄</span></ColorPicker.Trigger>
-						</ColorPicker.Control>
-						<ColorPicker.Positioner>
-							<ColorPicker.Content class="z-30 w-4xl rounded-xs border border-border bg-surface p-md shadow-xl">
-								<ColorPicker.Area class="relative block h-picker-area touch-none overflow-hidden rounded-xs"><ColorPicker.AreaBackground class="absolute inset-0" /><ColorPicker.AreaThumb class="absolute size-md -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white outline outline-foreground" /></ColorPicker.Area>
-								<div class="my-sm flex justify-between font-mono text-xs text-muted-foreground"><span>HUE</span><span>DRAG TO EXPLORE</span></div>
-								<ColorPicker.ChannelSlider class="relative block h-sm touch-none rounded-full" channel="hue"><ColorPicker.ChannelSliderTrack class="absolute inset-x-0 top-xs h-xs rounded-full hue-spectrum" /><ColorPicker.ChannelSliderThumb class="absolute top-1/2 size-sm -translate-x-1/2 -translate-y-1/2 rounded-full border border-foreground bg-surface" /></ColorPicker.ChannelSlider>
-						</ColorPicker.Content>
-						</ColorPicker.Positioner>
-						<ColorPicker.HiddenInput />
-					</ColorPicker.Root>
+					<div class="mb-sm flex items-center justify-between"><span class={label}>Primary color</span><span class={kicker}>FOUNDATION</span></div>
+					<ColorPicker label="Primary color" hideLabel alpha={false} bind:value={primary} />
 					<div class="mt-md flex flex-wrap items-center gap-sm" aria-label="Suggested primary colors">
 						<span class={`mb-xs w-full ${kicker}`}>A GOOD PLACE TO START</span>
 						{#each ['#e4573e', '#4967d5', '#247a68', '#8159b7', '#d08a24'] as swatch (swatch)}
@@ -146,9 +133,6 @@ const input =
 		height: var(--height);
 	}
 
-	:global(.hue-spectrum) {
-		background: linear-gradient(90deg, red, #ff0, #0f0, #0ff, #00f, #f0f, red);
-	}
 
 	.token-columns {
 		grid-template-columns: .5rem 1fr auto;

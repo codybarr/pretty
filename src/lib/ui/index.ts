@@ -4,6 +4,7 @@ export { default as RadioGroup } from "./RadioGroup.svelte";
 export { default as NumberInput } from "./NumberInput.svelte";
 export { default as PasswordInput } from "./PasswordInput.svelte";
 export { default as Button } from "./Button.svelte";
+export { default as ColorPicker } from "./ColorPicker.svelte";
 export { default as Checkbox } from "./Checkbox.svelte";
 export { default as Switch } from "./Switch.svelte";
 export { default as Select } from "./Select.svelte";

@@ -69,6 +69,11 @@ export const examples: Record<string, { summary: string; code: string }> = {
 			"A native action button with primary (default), secondary, outline, ghost, and danger variants. Sizes sm, md (default), and lg have minimum heights of 32, 40, and 48px. Standard button attributes and events are forwarded; type defaults to button, so form submission is opt-in.",
 		code: `<script lang="ts">\n  import { Button } from '$lib/ui';\n  let count = $state(0);\n</script>\n\n<Button onclick={() => count += 1}>Clicked {count} times</Button>\n<Button variant="secondary">Secondary</Button>\n<Button variant="outline">Outline</Button>\n<Button variant="ghost">Ghost</Button>\n<Button variant="danger">Delete</Button>\n\n<Button size="sm">Small</Button>\n<Button size="md">Medium</Button>\n<Button size="lg">Large</Button>\n<Button disabled>Unavailable</Button>\n<Button type="submit" form="settings">Save settings</Button>`,
 	},
+	"color-picker": {
+		summary:
+			"A compact color picker with hex and opacity inputs, a transparency-aware swatch, and a popover with a color area, hue/alpha sliders, and a screen eyedropper where supported. Bind value as an Ark Color object. Set alpha to false for solid colors, or hideLabel for an externally labeled layout. Accepts Ark root props including name, disabled, readOnly, and invalid.",
+		code: `<script lang="ts">\n  import { ColorPicker } from '$lib/ui';\n  import { parseColor } from '@ark-ui/svelte/color-picker';\n  let color = $state(parseColor('#e4573e'));\n</script>\n\n<ColorPicker label="Color" name="color" bind:value={color} />\n<ColorPicker label="Solid color" alpha={false} />\n<ColorPicker label="Unavailable" disabled />`,
+	},
 	checkbox: {
 		summary:
 			"A form-ready boolean choice with a visible label, keyboard focus, and an Ark hidden input.",

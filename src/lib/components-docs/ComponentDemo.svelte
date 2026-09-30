@@ -2,6 +2,7 @@
 import {
 	Button,
 	Checkbox,
+	ColorPicker,
 	Combobox,
 	Dialog,
 	Field,
@@ -14,7 +15,10 @@ import {
 	Tabs,
 } from "$lib/ui";
 
+import { parseColor } from "@ark-ui/svelte/color-picker";
+
 let { slug }: { slug: string } = $props();
+let color = $state(parseColor("#e4573e"));
 let displayName = $state("");
 let notes = $state("");
 let plan = $state<string | null>("design");
@@ -105,6 +109,12 @@ const options = [
     <PasswordInput label="Confirm password" size="lg" name="confirmPassword" autocomplete="new-password" invalid error="Passwords do not match." />
     <PasswordInput label="Read-only password" size="sm" value="read-only-example" readOnly />
     <PasswordInput label="Unavailable" value="disabled-example" disabled />
+  </div>
+{:else if slug === 'color-picker'}
+  <div class="grid w-full max-w-picker gap-lg">
+    <ColorPicker label="Color" name="color" bind:value={color} />
+    <ColorPicker label="Solid color" alpha={false} />
+    <ColorPicker label="Unavailable" disabled />
   </div>
 {:else if slug === 'checkbox'}
   <div class="grid gap-md"><Checkbox label="Send me product updates" name="updates" bind:checked={accepted} /><p class="font-mono text-xs text-muted-foreground">Checked: {accepted ? 'true' : 'false'}</p></div>
