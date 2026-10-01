@@ -5,6 +5,7 @@ import { ColorPicker } from "$lib/ui";
 import { SegmentGroup } from "@ark-ui/svelte/segment-group";
 import { Tabs } from "@ark-ui/svelte/tabs";
 import ThemeSwitcher from "$lib/ThemeSwitcher.svelte";
+import Brand from "$lib/Brand.svelte";
 import ComponentSearch from "$lib/ComponentSearch.svelte";
 
 let primary = $state(parseColor("#e4573e"));
@@ -52,10 +53,7 @@ const input =
 
 <div class="mx-auto max-w-shell px-xl text-foreground max-tablet:px-lg" data-design="slick">
 	<header class="flex min-h-3xl flex-wrap items-center justify-between gap-sm border-b border-border py-sm max-phone:min-h-2xl">
-		<a class="flex items-center gap-sm text-brand font-bold text-foreground no-underline" href={resolve('/')} aria-label="Pretty home">
-			<span class="flex h-md items-end gap-xs" aria-hidden="true"><span class="h-sm w-xs rotate-12 rounded-full bg-primary"></span><span class="h-md w-xs rotate-12 rounded-full bg-primary"></span><span class="h-md w-xs rotate-12 rounded-full bg-primary"></span></span>
-			<span>pretty</span>
-		</a>
+		<Brand />
 		<div class="flex items-center gap-sm font-mono text-xs text-muted-foreground max-tablet:hidden"><span class="inline-block size-xs rounded-full bg-primary"></span> SLICK / THEME WORKSHOP <span class="mx-xs h-md border-l border-border"></span> LIVE SESSION</div>
 		<div class="flex items-center gap-md max-phone:w-full max-phone:justify-between">
 			<ThemeSwitcher />
