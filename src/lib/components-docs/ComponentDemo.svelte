@@ -13,6 +13,8 @@ import {
 	Select,
 	Switch,
 	Tabs,
+	Toaster,
+	createToaster,
 } from "$lib/ui";
 
 import { parseColor } from "@ark-ui/svelte/color-picker";
@@ -40,6 +42,31 @@ let medium = $state(true);
 let large = $state(true);
 let team = $state<string[]>([]);
 let tab = $state("overview");
+const toaster = createToaster({
+	placement: "bottom-end",
+	overlap: true,
+	gap: 12,
+	max: 4,
+	duration: 6000,
+	offsets: "1rem",
+});
+function showLoadingToast() {
+	const id = toaster.create({
+		type: "loading",
+		title: "Saving changes",
+		description: "Syncing your workspace.",
+	});
+	setTimeout(
+		() =>
+			toaster.update(id, {
+				type: "success",
+				title: "Changes saved",
+				description: "Your workspace is up to date.",
+				duration: 6000,
+			}),
+		2000,
+	);
+}
 const options = [
 	{ label: "Design", value: "design" },
 	{ label: "Engineering", value: "engineering" },
@@ -130,6 +157,16 @@ const options = [
   <div class="grid max-w-picker gap-md"><Combobox label="Team" {options} bind:value={team} name="team" /><p class="font-mono text-xs text-muted-foreground">Selected: {team[0] ?? 'none'}</p></div>
 {:else if slug === 'tabs'}
   <div class="w-full max-w-copy"><Tabs bind:value={tab} tabs={[{ label: 'Overview', value: 'overview', content: overview }, { label: 'Activity', value: 'activity', content: activity }]} /></div>
+{:else if slug === 'toast'}
+  <div class="flex flex-wrap gap-sm">
+    <Button variant="outline" onclick={() => toaster.success({ title: 'Changes saved', description: 'Your workspace is up to date.' })}>Success</Button>
+    <Button variant="outline" onclick={() => toaster.error({ title: 'Upload failed', description: 'Check your connection and try again.' })}>Error</Button>
+    <Button variant="outline" onclick={() => toaster.warning({ title: 'Storage almost full', description: 'You have less than 10% storage remaining.' })}>Warning</Button>
+    <Button variant="outline" onclick={() => toaster.info({ title: 'Update available', description: 'A new version is ready to install.' })}>Info</Button>
+    <Button variant="outline" onclick={showLoadingToast}>Loading</Button>
+    <Button variant="secondary" onclick={() => toaster.info({ title: 'Item archived', description: 'Moved to your archive.', action: { label: 'Undo', onClick: () => toaster.success({ title: 'Item restored' }) } })}>With action</Button>
+  </div>
+  <Toaster {toaster} />
 {:else if slug === 'dialog'}
   <Dialog title="Details" description="Review the information below." trigger={openDetails}><p>Your details go here.</p></Dialog>
 {/if}

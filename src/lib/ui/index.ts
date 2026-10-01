@@ -11,6 +11,8 @@ export { default as Select } from "./Select.svelte";
 export { default as Combobox } from "./Combobox.svelte";
 export { default as Tabs } from "./Tabs.svelte";
 export { default as Dialog } from "./Dialog.svelte";
+export { default as Toaster } from "./Toaster.svelte";
+export { createToaster } from "@ark-ui/svelte/toast";
 export {
 	button,
 	control,

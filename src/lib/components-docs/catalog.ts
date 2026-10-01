@@ -99,6 +99,11 @@ export const examples: Record<string, { summary: string; code: string }> = {
 			"Switch among peer content panels with roving focus and arrow-key navigation.",
 		code: `<script lang="ts">\n  import { Tabs } from '$lib/ui';\n  let active = $state('overview');\n</script>\n\n{#snippet overview()}Overview content{/snippet}\n{#snippet activity()}Recent activity{/snippet}\n\n<Tabs bind:value={active} tabs={[\n  { label: 'Overview', value: 'overview', content: overview },\n  { label: 'Activity', value: 'activity', content: activity },\n]} />`,
 	},
+	toast: {
+		summary:
+			"Non-blocking feedback with semantic status icons, stacking, pause-on-hover, drag-to-dismiss, and optional inline actions. Create a toaster per component tree and render one Toaster for it. Supports success, error, warning, info, and loading; inherits local light/dark and corner tokens without a portal. Placement, duration, and maximum visible notifications are configured through Ark’s createToaster.",
+		code: `<script lang="ts">\n  import { Button, Toaster, createToaster } from '$lib/ui';\n  const toaster = createToaster({\n    placement: 'bottom-end',\n    overlap: true,\n    gap: 12,\n    max: 4,\n    duration: 6000,\n    offsets: '1rem',\n  });\n</script>\n\n<Button onclick={() => toaster.success({\n  title: 'Changes saved',\n  description: 'Your workspace is up to date.',\n})}>Save changes</Button>\n\n<Button variant="outline" onclick={() => toaster.info({\n  title: 'Item archived',\n  action: { label: 'Undo', onClick: () => toaster.success({ title: 'Item restored' }) },\n})}>Archive</Button>\n\n<Toaster {toaster} />`,
+	},
 	dialog: {
 		summary:
 			"A modal task surface with Ark-managed focus trapping, dismissal, and return focus.",

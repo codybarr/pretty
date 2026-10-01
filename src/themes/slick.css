@@ -30,6 +30,9 @@
 	--color-primary-foreground: oklch(1 0 0);
 	/* Stronger brand fill keeps small button labels at AA contrast. */
 	--color-primary-action: oklch(0.55 0.17 32.24);
+	--color-success: oklch(0.46 0.12 155);
+	--color-warning: oklch(0.5 0.12 75);
+	--color-info: oklch(0.5 0.15 255);
 	--color-danger: oklch(0.51 0.2 25);
 	--color-danger-foreground: oklch(1 0 0);
 	--color-accent: oklch(0.96 0.015 30);

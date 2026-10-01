@@ -84,6 +84,9 @@
 	--color-muted-foreground: oklch(0.74 0 0);
 	--color-border: oklch(0.34 0 0);
 	/* Validation copy and destructive actions need a brighter red on dark surfaces. */
+	--color-success: oklch(0.76 0.14 155);
+	--color-warning: oklch(0.8 0.14 75);
+	--color-info: oklch(0.76 0.12 255);
 	--color-danger: oklch(0.72 0.16 25);
 	--color-danger-foreground: oklch(0.17 0 0);
 }
